@@ -5,15 +5,31 @@
   
 
   
-  <title>Hexo</title>
+  <title>第一篇博客（练习使用） | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="一阶倒立摆的Simscape Multibody建模 最近做了关于倒立摆的建模，基于simscape的multibody。参考了matlab上相应的示例。 数学模型倒立摆的受力分析网上有很多，这里就不再叙述。直接放线性化后的方程：     F = (M+m)x″-mLφ″     (I+mL²)φ″= mLx″+ mgLφ     （F为外力，x为物块位移，M，m为物块和摆杆的质量，φ为摆杆相对竖">
+<meta name="keywords" content="仿真">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一篇博客（练习使用）">
+<meta property="og:url" content="http://yoursite.com/2019/01/16/一阶倒立摆simscape建模/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一阶倒立摆的Simscape Multibody建模 最近做了关于倒立摆的建模，基于simscape的multibody。参考了matlab上相应的示例。 数学模型倒立摆的受力分析网上有很多，这里就不再叙述。直接放线性化后的方程：     F = (M+m)x″-mLφ″     (I+mL²)φ″= mLx″+ mgLφ     （F为外力，x为物块位移，M，m为物块和摆杆的质量，φ为摆杆相对竖">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://res.cloudinary.com/dtbemd1kd/image/upload/v1547704181/blog%27s%20img/%E5%80%92%E7%AB%8B%E6%91%86%E5%AE%9E%E7%89%A9.png">
+<meta property="og:image" content="https://res.cloudinary.com/dtbemd1kd/image/upload/v1547705495/blog%27s%20img/%E7%8A%B6%E6%80%81%E6%96%B9%E7%A8%8B.png">
+<meta property="og:image" content="https://res.cloudinary.com/dtbemd1kd/image/upload/v1547705496/blog%27s%20img/%E7%8A%B6%E6%80%81%E6%96%B9%E7%A8%8B2.png">
+<meta property="og:image" content="https://res.cloudinary.com/dtbemd1kd/image/upload/v1547705495/blog%27s%20img/%E5%80%92%E7%AB%8B%E6%91%86%E7%8A%B6%E6%80%81%E7%9F%A9%E9%98%B5.png">
+<meta property="og:image" content="https://res.cloudinary.com/dtbemd1kd/image/upload/v1547705806/blog%27s%20img/%E5%80%92%E7%AB%8B%E6%91%86%E4%BB%BF%E7%9C%9F%E6%A8%A1%E5%9E%8B.png">
+<meta property="og:image" content="https://res.cloudinary.com/dtbemd1kd/image/upload/v1547704181/blog%27s%20img/%E5%80%92%E7%AB%8B%E6%91%86LQR.png">
+<meta property="og:image" content="https://res.cloudinary.com/dtbemd1kd/image/upload/v1547706860/blog%27s%20img/%E5%80%92%E7%AB%8B%E6%91%86%E8%A7%92%E5%BA%A6.png">
+<meta property="og:image" content="https://res.cloudinary.com/dtbemd1kd/image/upload/v1547706860/blog%27s%20img/%E5%80%92%E7%AB%8B%E6%91%86%E8%A7%92%E5%8A%A0%E9%80%9F%E5%BA%A6.png">
+<meta property="og:image" content="https://res.cloudinary.com/dtbemd1kd/image/upload/v1547706860/blog%27s%20img/%E5%80%92%E7%AB%8B%E6%91%86%E4%BD%8D%E7%A7%BB.png">
+<meta property="og:image" content="https://res.cloudinary.com/dtbemd1kd/image/upload/v1547706860/blog%27s%20img/%E5%80%92%E7%AB%8B%E6%91%86%E9%80%9F%E5%BA%A6.png">
+<meta property="og:updated_time" content="2019-01-17T06:39:26.438Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="第一篇博客（练习使用）">
+<meta name="twitter:description" content="一阶倒立摆的Simscape Multibody建模 最近做了关于倒立摆的建模，基于simscape的multibody。参考了matlab上相应的示例。 数学模型倒立摆的受力分析网上有很多，这里就不再叙述。直接放线性化后的方程：     F = (M+m)x″-mLφ″     (I+mL²)φ″= mLx″+ mgLφ     （F为外力，x为物块位移，M，m为物块和摆杆的质量，φ为摆杆相对竖">
+<meta name="twitter:image" content="https://res.cloudinary.com/dtbemd1kd/image/upload/v1547704181/blog%27s%20img/%E5%80%92%E7%AB%8B%E6%91%86%E5%AE%9E%E7%89%A9.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -60,9 +76,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-一阶倒立摆simscape建模" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-一阶倒立摆simscape建模" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/16/一阶倒立摆simscape建模/" class="article-date">
   <time datetime="2019-01-16T08:57:04.000Z" itemprop="datePublished">2019-01-16</time>
@@ -75,8 +89,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/16/一阶倒立摆simscape建模/">第一篇博客（练习使用）</a>
+    <h1 class="article-title" itemprop="name">
+      第一篇博客（练习使用）
     </h1>
   
 
@@ -109,56 +123,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-hello-world" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/16/hello-world/" class="article-date">
-  <time datetime="2019-01-16T08:21:57.864Z" itemprop="datePublished">2019-01-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/16/hello-world/">Hello World</a>
-    </h1>
+    <a href="/2019/01/16/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/16/hello-world/" data-id="cjr08ygde0003wsufja313u7h" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-
 
 </section>
         
