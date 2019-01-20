@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="#KV58学习笔记-GPIO想要使用GPIO，先需要配置时钟和PORT端口。时钟的配置由SIM模块控制。SIM：提供系统控制和芯片配置寄存器,它有如下功能：  SIM具有多个寄存器来进行多个外设的配置，PORT的配置由SIM_SCGC5管理。 未完待续。。。。。。。。。。">
+<meta name="description" content="#KV58学习笔记-GPIO想要使用GPIO，先需要配置时钟和PORT端口。时钟的配置由SIM模块控制。SIM：提供系统控制和芯片配置寄存器,它有如下功能：  SIM具有多个寄存器来进行多个外设的配置，PORT的配置由SIM_SCGC5管理。   void  port_init(PTXn_e ptxn, PORT_CFG cfg ){  SIM_SCGC5 |= (SIM_SCGC5_PORTA_">
 <meta name="keywords" content="单片机">
 <meta property="og:type" content="article">
 <meta property="og:title" content="KV58学习笔记之GPIO">
 <meta property="og:url" content="http://yoursite.com/2019/01/19/KV58学习笔记之GPIO/index.html">
 <meta property="og:site_name" content="Tangsong&#39;s blog">
-<meta property="og:description" content="#KV58学习笔记-GPIO想要使用GPIO，先需要配置时钟和PORT端口。时钟的配置由SIM模块控制。SIM：提供系统控制和芯片配置寄存器,它有如下功能：  SIM具有多个寄存器来进行多个外设的配置，PORT的配置由SIM_SCGC5管理。 未完待续。。。。。。。。。。">
+<meta property="og:description" content="#KV58学习笔记-GPIO想要使用GPIO，先需要配置时钟和PORT端口。时钟的配置由SIM模块控制。SIM：提供系统控制和芯片配置寄存器,它有如下功能：  SIM具有多个寄存器来进行多个外设的配置，PORT的配置由SIM_SCGC5管理。   void  port_init(PTXn_e ptxn, PORT_CFG cfg ){  SIM_SCGC5 |= (SIM_SCGC5_PORTA_">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://res.cloudinary.com/dtbemd1kd/image/upload/v1547898202/blog%27s%20img/SIM_s_features.png">
 <meta property="og:image" content="https://res.cloudinary.com/dtbemd1kd/image/upload/v1547898677/blog%27s%20img/SIM_SCG5.png">
-<meta property="og:updated_time" content="2019-01-19T14:58:02.205Z">
+<meta property="og:updated_time" content="2019-01-20T08:57:53.523Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KV58学习笔记之GPIO">
-<meta name="twitter:description" content="#KV58学习笔记-GPIO想要使用GPIO，先需要配置时钟和PORT端口。时钟的配置由SIM模块控制。SIM：提供系统控制和芯片配置寄存器,它有如下功能：  SIM具有多个寄存器来进行多个外设的配置，PORT的配置由SIM_SCGC5管理。 未完待续。。。。。。。。。。">
+<meta name="twitter:description" content="#KV58学习笔记-GPIO想要使用GPIO，先需要配置时钟和PORT端口。时钟的配置由SIM模块控制。SIM：提供系统控制和芯片配置寄存器,它有如下功能：  SIM具有多个寄存器来进行多个外设的配置，PORT的配置由SIM_SCGC5管理。   void  port_init(PTXn_e ptxn, PORT_CFG cfg ){  SIM_SCGC5 |= (SIM_SCGC5_PORTA_">
 <meta name="twitter:image" content="https://res.cloudinary.com/dtbemd1kd/image/upload/v1547898202/blog%27s%20img/SIM_s_features.png">
 
 
@@ -306,7 +306,45 @@
         <p>#KV58学习笔记-GPIO<br>想要使用GPIO，先需要配置时钟和PORT端口。时钟的配置由SIM模块控制。<br>SIM：提供系统控制和芯片配置寄存器,它有如下功能：</p>
 <p><img src="https://res.cloudinary.com/dtbemd1kd/image/upload/v1547898202/blog%27s%20img/SIM_s_features.png" alt=""></p>
 <p>SIM具有多个寄存器来进行多个外设的配置，PORT的配置由SIM_SCGC5管理。</p>
-<p><img src="https://res.cloudinary.com/dtbemd1kd/image/upload/v1547898677/blog%27s%20img/SIM_SCG5.png" alt=""><br>未完待续。。。。。。。。。。</p>
+<p><img src="https://res.cloudinary.com/dtbemd1kd/image/upload/v1547898677/blog%27s%20img/SIM_SCG5.png" alt=""></p>
+<ul>
+<li>void  port_init(PTXn_e ptxn, PORT_CFG cfg )<br>{<br>  SIM_SCGC5 |= (SIM_SCGC5_PORTA_MASK &lt;&lt; PTX(ptxn));                          //开启PORTx端口<br>  PORT_ISFR_REG(PORTX_BASE(ptxn)) = (1&lt;&lt;PTn(ptxn));                           // 清空标志位<br>  PORT_PCR_REG(PORTX_BASE(ptxn), PTn(ptxn)) = cfg;<br>  // 复用功能 , 确定触发模式 ,开启上拉或下拉电阻<br>}</li>
+</ul>
+<p>这个函数第一行语句对SIM_SCGC5相应位置写1开启对应PORT时钟,第二第三条语句对ISFR和PCR操作，清除标志位，配置触发模式，其中触发模式使用枚举方便配置  </p>
+<ul>
+<li><p>typedef enum PORT_CFG<br>{<br>IRQ_ZERO     = PORT_PCR_IRQC(0x08),     //低电平触发<br>IRQ_RISING   = PORT_PCR_IRQC(0x09),    //上升沿触发<br>IRQ_FALLING  = PORT_PCR_IRQC(0x0A),   //下降沿触发<br>IRQ_EITHER   = PORT_PCR_IRQC(0x0B),  //跳变沿触发<br>IRQ_ONE      = PORT_PCR_IRQC(0x0C),  //高电平触发  </p>
+<p>//DMA请求<br>DMA_RISING   = PORT_PCR_IRQC(0x01),   //上升沿触发<br>DMA_FALLING  = PORT_PCR_IRQC(0x02),   //下降沿触发<br>DMA_EITHER   = PORT_PCR_IRQC(0x03),   //跳变沿触发  </p>
+<p>//功能复用<br>ALT0         = PORT_PCR_MUX(0x00),<br>ALT1         = PORT_PCR_MUX(0x01),    //GPIO<br>ALT2         = PORT_PCR_MUX(0x02),<br>ALT3         = PORT_PCR_MUX(0x03),<br>ALT4         = PORT_PCR_MUX(0x04),<br>ALT5         = PORT_PCR_MUX(0x05),<br>ALT6         = PORT_PCR_MUX(0x06),<br>ALT7         = PORT_PCR_MUX(0x07),  </p>
+<p>HDS          = PORT_PCR_DSE(0x01),    //输出高驱动能力<br>OD           = PORT_PCR_ODE(0x01),    //漏极输出<br>PF           = PORT_PCR_PFE(0x01),    //带无源滤波器<br>SSR          = PORT_PCR_SRE(0x01),     //输出慢变化率   </p>
+<p>//下拉上拉选择<br>PULLDOWN     = 0x02 &lt;&lt; PORT_PCR_PS_SHIFT,     //下拉<br>PULLUP       = 0x03 &lt;&lt; PORT_PCR_PS_SHIFT,     //上拉<br>} PORT_CFG;</p>
+</li>
+</ul>
+<p>对PCR寄存器配置使用枚举体，方便书写</p>
+<ul>
+<li><p>void gpio_init (PTXn_e ptxn, GPIO_CFG cfg, uint8 data)<br>{<br>port_init(ptxn,ALT1);         //复用管脚为GPIO功能<br> //端口方向控制输入还是输出<br>  if(  cfg == GPI )<br>  {  </p>
+<pre><code>//设置端口方向为输入  
+GPIO_PDDR_REG(GPIOX_BASE(ptxn)) &amp;= ~(1 &lt;&lt; PTn(ptxn));       
+// GPIO PDDR 管脚号 清0，即对应管脚配置为端口方向输入  
+</code></pre><p>  }<br>  else<br>  {  </p>
+<pre><code>//设置端口方向为输出  
+GPIO_PDDR_REG(GPIOX_BASE(ptxn)) |= (1 &lt;&lt; PTn(ptxn));       
+ // GPIO PDDR 管脚号 置1，即对应管脚配置为端口方向输出  
+//端口输出数据  
+if(data == 0)  
+{  
+    GPIO_PDOR_REG(GPIOX_BASE(ptxn)) &amp;= ~(1 &lt;&lt; PTn(ptxn));  
+     // GPIO PDOR 管脚号 清0，即对应管脚配置为端口输出低电平  
+}  
+else  
+{  
+    GPIO_PDOR_REG(GPIOX_BASE(ptxn))  |= (1 &lt;&lt; PTn(ptxn));  
+    // GPIO PDOR 管脚号 置1，即对应管脚配置为端口输出高电平  
+}  
+</code></pre><p>  }  </p>
+<p>}  </p>
+</li>
+</ul>
+<p>剩下的GPIO配置就是配置输入输出，由PDDR寄存器控制，配置输出时，PDOR控制电平输出状态</p>
 
       
     </div>
